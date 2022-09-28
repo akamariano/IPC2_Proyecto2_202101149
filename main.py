@@ -6,7 +6,9 @@ from tkinter import N, filedialog as fd
 import numpy as np
 from xml.dom import minidom
 from listaempresas import listaempresas
+from listasimulacion import listasimulacion
 lempresa=listaempresas()
+lsimul=listasimulacion()
 a=""
 while a !="7":
 	print("-----MENU-----")
@@ -89,7 +91,45 @@ while a !="7":
 		print("Cargar Archivo con configuración Inicial para la prueba")
 		print("----------------------------------------------------------------------------------------------------------------------")
 		filename2 = fd.askopenfilename(initialdir = "/", title = "Select a File", filetypes = (("Text files", "*.xml*"),("all files", "*.*")))
-		docxml2=minidom.parse(filename)
+		docxml2=minidom.parse(filename2)
+		print(docxml2)
+		config=docxml2.getElementsByTagName('configInicial')
+		idconfig=(config[0].attributes['id'].value)
+		idempresa=(config[0].attributes['idEmpresa'].value)
+		idpunto=(config[0].attributes['idPunto'].value)
+		print("ID Configuración: ",idconfig," ID Empresa: ",idempresa," ID Punto: ", idpunto)
+		lempresa.getempresa(nombre=idempresa)
+		lempresa.puntodoc2(nombre=idempresa,p=idpunto)
+		escritorioprueba=docxml2.getElementsByTagName('escritorio')
+		cont=0
+		deskactivos=[]
+		for e in escritorioprueba:
+			idpruebadesk=(escritorioprueba[cont].attributes['idEscritorio'].value)
+			deskactivos.append(idpruebadesk)
+			cont+=1
+		cliente=docxml2.getElementsByTagName('cliente')
+		cont1=0
+		clientes=[]
+		for c in cliente:
+			idcliente=(cliente[cont1].attributes['dpi'].value)
+			nombreclient=c.getElementsByTagName('nombre')
+			transacclient=c.getElementsByTagName('transaccion')
+			cont2=0
+			transaccionesclientes=[]
+			for t in transacclient:
+				idtransacclient=(transacclient[cont2].attributes['idTransaccion'].value)
+				cantidadtransacclient=(transacclient[cont2].attributes['cantidad'].value)
+				transaccionesclientes.append([idtransacclient,cantidadtransacclient])
+				cont2+=1
+			clientes.append([idcliente,nombreclient[0].firstChild.data,transaccionesclientes])
+			cont1+=1
+
+		print("Escritorios activos: ", deskactivos)
+		print("Clientes y sus transacciones: ",clientes)
+		lempresa.desksa(nombre=idempresa,p=idpunto)
+		d=lempresa.getdesk()
+		lsimul.insertlast(idempresa,idpunto,d,deskactivos,clientes)
+		lsimul.printlist()
 		
 	if a=="5":
 		clear = lambda: os.system('cls')

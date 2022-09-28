@@ -1,37 +1,36 @@
 from nodo import Nodo
-class listaempresas():
+class listasimulacion():
     def __init__(self):
         self.primero=None
         self.ultimo = None
         self.size = 0
-        self.desks=[]
-    def insertlast(self,id,nombre,abrev,listaatencion,listatransac):
+    def insertlast(self,empresa,puntoatencion,escritorios,escritoriosactivos,clientes):
         # Mejor insertar al final
         
-        newempresa= Nodo(dato=[id,nombre,abrev,listaatencion,listatransac])
+        newsimul= Nodo(dato=[empresa,puntoatencion,escritorios,escritoriosactivos,clientes])
         self.size += 1
         if self.primero is None:
-            self.primero = newempresa
-            self.ultimo = newempresa
+            self.primero = newsimul
+            self.ultimo = newsimul
         else:
             tmp = self.primero
             while tmp.getsig() is not None:
                 tmp=tmp.getsig()
-            tmp.setsig(newempresa)
+            tmp.setsig(newsimul)
     def printlist(self):
         print("---------------------------------------------------")
-        print("Empresas y sus Atributos")
+        print("Simulacion")
         tmp = self.primero
-        print("Empresas añadidas: ",self.size)
+        # print("Empresas añadidas: ",self.size)
         while tmp is not None:
-            print("ID: ",tmp.dato[0],"Nombre: ",tmp.dato[1],"Abreviatura: ",tmp.dato[2],"Puntos de Atención: ",tmp.dato[3],"Transacciones: ",tmp.dato[4])
+            print("Empresa: ",tmp.dato[0],"Punto de Atención: ",tmp.dato[1],"Escritorios: ",tmp.dato[2],"escritorios Activos: ",tmp.dato[3],"Clientes: ",tmp.dato[4])
             tmp=tmp.getsig()
         
     def getempresa(self, nombre):
         tmp = self.primero
         for x in range(self.size):
             if tmp.dato[0]== nombre:
-                print("ID: ",tmp.dato[0],"Nombre: ",tmp.dato[1],"Abreviatura: ",tmp.dato[2],"Puntos de Atención: ",tmp.dato[3],"Transacciones: ",tmp.dato[4]) 
+                print("Empresa: ",tmp.dato[0],"Punto de Atención: ",tmp.dato[1],"Escritorios: ",tmp.dato[2],"escritorios Activos: ",tmp.dato[3],"Clientes: ",tmp.dato[4]) 
                 
                 return tmp
             tmp = tmp.getsig()
@@ -84,35 +83,5 @@ class listaempresas():
             temp = None
             temp = self.primero
             self.size=0
-    def desksa(self, nombre,p):
-        tmp = self.primero
-        for x in range(self.size):
-           
-            if tmp.dato[0]== nombre:
-                # print("Puntos de Atención: ",tmp.dato[3])
-                at=[]
-                for x in tmp.dato[3]:
-                    at.append(x)
-                # print(at)
-                # print("Seleccione su punto de atención")
-                # p=input()
-                n=0
-                for x in at:
-                    if at[n][0]==p:
-                        print("Según el documento de configuración ha seleccionado: ",x)
-                        print("Escritorios punto seleccionado: ",at[n][3])
-                        cont=0
-                        for a in at[n][3]:
-                            cont+=1
-                            self.desks.append(a)
-                            print("Escritorio:",cont,a)
-                        # self.desks=at[n][3]
-                        
-                    n+=1
-                return tmp
-            tmp = tmp.getsig()
-    def getdesk(self):
-        return self.desks
-        
     
     
