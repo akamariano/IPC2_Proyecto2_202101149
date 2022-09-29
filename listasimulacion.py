@@ -83,5 +83,6 @@ class listasimulacion():
             temp = None
             temp = self.primero
             self.size=0
+        
     
     
