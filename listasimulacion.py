@@ -77,7 +77,7 @@ class listasimulacion():
     def delete(self):
         temp = self.primero
         if temp is None:
-            print("\n No es posible limpiar el sistema")
+            print("\n No es posible limpiar el sistema o no contiene datos del archivo de entrada 2")
         while temp:
             self.primero = temp.getsig()
             temp = None

@@ -28,20 +28,21 @@ class listaclientes():
             tmp=tmp.getsig()
         
 
-    def delete(self):
-        temp = self.primero
-        if temp is None:
-            print("\n No es posible limpiar el sistema")
-        while temp:
-            self.primero = temp.getsig()
-            temp = None
-            temp = self.primero
-            self.size=0
     def clientesget(self):
         tmp = self.primero
         while tmp is not None:
             self.construct.append([tmp.dato[0],tmp.dato[1],tmp.dato[2]])
             tmp=tmp.getsig()    
     def returnclientes(self):
+        
         return self.construct
+    def delete(self):
+        temp = self.primero
+        if temp is None:
+            print("\n No es posible limpiar el sistema o no ha añadido cliented del archivo de entrada tipo 2")
+        while temp:
+            self.primero = temp.getsig()
+            temp = None
+            temp = self.primero
+            self.size=0
     

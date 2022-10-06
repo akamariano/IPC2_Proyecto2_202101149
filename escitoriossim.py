@@ -5,10 +5,10 @@ class listadesks():
         self.ultimo = None
         self.size = 0
         self.construct=[]
-    def insertlast(self,id,estado):
+    def insertlast(self,id,estado,clientesatendidos,listatimes):
         # Mejor insertar al final
         
-        newdesk= Nodo(dato=[id,estado])
+        newdesk= Nodo(dato=[id,estado,clientesatendidos,listatimes])
         self.size += 1
         if self.primero is None:
             self.primero = newdesk
@@ -24,7 +24,7 @@ class listadesks():
         tmp = self.primero
         # print("Empresas añadidas: ",self.size)
         while tmp is not None:
-            print("Desk ID: ",tmp.dato[0],"Desk State: ",tmp.dato[1])
+            print("Desk ID: ",tmp.dato[0],"Desk State: ",tmp.dato[1],"Clientes Atendidos: ",tmp.dato[2],"Tiempos: ",tmp.dato[3])
             tmp=tmp.getsig()
         
 
@@ -40,8 +40,8 @@ class listadesks():
     def clientesget(self):
         tmp = self.primero
         while tmp is not None:
-            self.construct.append([tmp.dato[0],tmp.dato[1]])
+            self.construct.append([tmp.dato[0],tmp.dato[1],tmp.dato[2],tmp.dato[3]])
             tmp=tmp.getsig()    
-    def returnclientes(self):
+    def returndesks(self):
+        
         return self.construct
-    

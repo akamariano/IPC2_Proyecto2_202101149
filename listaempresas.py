@@ -5,6 +5,7 @@ class listaempresas():
         self.ultimo = None
         self.size = 0
         self.desks=[]
+        self.times=""
     def insertlast(self,id,nombre,abrev,listaatencion,listatransac):
         # Mejor insertar al final
         
@@ -78,7 +79,7 @@ class listaempresas():
     def delete(self):
         temp = self.primero
         if temp is None:
-            print("\n No es posible limpiar el sistema")
+            print("\n No es posible limpiar el sistema o no ha añadido empresas del tipo archivo de entrada 1")
         while temp:
             self.primero = temp.getsig()
             temp = None
@@ -113,6 +114,17 @@ class listaempresas():
             tmp = tmp.getsig()
     def getdesk(self):
         return self.desks
+    def gettiempo(self,id):
+        tmp = self.primero
+        for x in range(self.size):
+            if tmp.dato[0]== id:
+                self.times=tmp.dato[4] 
+                print("Transacciones de la empresa: ",tmp.dato[4])
+                self.times=tmp.dato[4]
+                print("Tiempo",self.times)
+                return tmp
+            tmp = tmp.getsig()
+
         
     
     

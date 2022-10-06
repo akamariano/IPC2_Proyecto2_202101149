@@ -5,6 +5,8 @@ class Queue():
         self.rear=None
         self.size=0
         self.cola=[]
+        self.atendiendo=""
+        self.transaccs=""
     def isEmpty(self):
         return self.primero == None
     def EnQueue(self, cliente):
@@ -25,7 +27,11 @@ class Queue():
             element = temp.dato
         self.primero= temp.siguiente
         temp = None
+        print("Cliente: ",element, " siendo atendido")
+        self.transaccs=element[0][2]
+        self.atendiendo=element[0][1]
         return element
+        
     def printlist(self):
         current = self.primero
         while(current):
